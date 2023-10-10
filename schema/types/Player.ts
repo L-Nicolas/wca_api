@@ -4,7 +4,6 @@ import {
   GraphQLInt,
   GraphQLString,
 } from 'graphql'
-import PlayerPosition from '../enums/PlayerPosition'
 import Team from './Team'
 
 export default new GraphQLObjectType({

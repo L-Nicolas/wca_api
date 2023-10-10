@@ -68,13 +68,11 @@ export class Group {
   @Field()
   name!: string;
 }
-
 @ObjectType()
 export class GetAllGroupsResponse {
   @Field(() => [Group])
   groups!: Group[];
 }
-
 @ObjectType()
 export class GetGroupByIdResponse {
   @Field(() => Group, { nullable: true })
