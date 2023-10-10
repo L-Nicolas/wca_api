@@ -1,12 +1,12 @@
-import database from "../database/";
+import database from '../database/'
 
 const playerResolver = {
   Query: {
     players: async () => {
       try {
-        const { data, error } = await database.from("Players").select("*");
+        const { data, error } = await database.from('Players').select('*')
         if (error) {
-          throw new Error("Impossible de récupérer les players");
+          throw new Error('Impossible de récupérer les players')
         }
         return data.map((player) => ({
           id: player.id,
@@ -18,17 +18,21 @@ const playerResolver = {
           yellowCards: player.yellowCards,
           redCards: player.redCards,
           photoURL: player.photoURL,
-        }));
+        }))
       } catch (error) {
-        throw new Error("Erreur lors de la récupération des players");
+        throw new Error('Erreur lors de la récupération des players')
       }
     },
     playersByIDTeam: async ({ team_id }: any) => {
       try {
-        const { data, error } = await database.from("Players").select("*").eq("team_id", team_id);
+        const { data, error } = await database
+          .from('Players')
+          .select('*')
+          .eq('team_id', team_id)
         if (error) {
-          throw new Error("Impossible de récupérer les players");
+          throw new Error('Impossible de récupérer les players')
         }
+
         return data.map((player) => ({
           id: player.id,
           name: player.name,
@@ -39,12 +43,12 @@ const playerResolver = {
           yellowCards: player.yellowCards,
           redCards: player.redCards,
           photoURL: player.photoURL,
-        }));
+        }))
       } catch (error) {
-        throw new Error("Erreur lors de la récupération des players");
+        throw new Error('Erreur lors de la récupération des players')
       }
     },
   },
-};
+}
 
-export default playerResolver;
+export default playerResolver
