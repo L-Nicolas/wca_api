@@ -1,9 +1,14 @@
-import { GraphQLObjectType, GraphQLID, GraphQLInt, GraphQLString } from "graphql";
-import PlayerPosition from "../enums/PlayerPosition";
-import Team from "./Team";
+import {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLString,
+} from 'graphql'
+import PlayerPosition from '../enums/PlayerPosition'
+import Team from './Team'
 
 export default new GraphQLObjectType({
-  name: "Player",
+  name: 'Player',
   fields: {
     id: {
       type: GraphQLID,
@@ -12,7 +17,7 @@ export default new GraphQLObjectType({
       type: GraphQLString,
     },
     position: {
-      type: PlayerPosition,
+      type: GraphQLString,
     },
     goalsScored: {
       type: GraphQLInt,
@@ -33,4 +38,4 @@ export default new GraphQLObjectType({
       type: Team,
     },
   },
-});
+})
