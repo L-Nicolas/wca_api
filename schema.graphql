@@ -1,0 +1,69 @@
+type Query {
+  groups: [Group]
+  group(id: ID): Group
+
+  teams: [Team]
+  team(id: ID): Team
+
+  players: [Player]
+  player(id: ID): Player
+
+  tournaments: [Tournament]
+  tournament(id: ID): Tournament
+
+  matchs: [Match]
+  match(id: ID): Match
+}
+
+type Group {
+  id: ID
+  name: String
+  teams: [Team]
+}
+
+type Team {
+  id: ID
+  name: String
+  abbreviation: String
+  flagURL: String
+  photoURL: String
+}
+
+type Player {
+  id: ID
+  name: String
+  position: PlayerPosition
+  goalsScored: Int
+  assists: Int
+  yellowCards: Int
+  redCards: Int
+  photoURL: String
+  team: Team
+}
+
+type Tournament {
+  id: ID
+  name: String
+  startDate: String
+  endDate: String
+  topScorer: Int
+}
+
+type Match {
+  id: ID
+  matchDay: String
+  location: String
+  teamA: Team
+  teamB: Team
+  teamAScore: Int
+  teamBScore: Int
+}
+
+enum PlayerPosition {
+  FORWARD 
+  MIDFIELDER
+  DEFENDER
+  GOALKEEPER
+}
+
+
