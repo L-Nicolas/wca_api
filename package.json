@@ -12,6 +12,7 @@
   "engines": {
     "node": "18.17.1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/L-Nicolas/wca_api.git"
