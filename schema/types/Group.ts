@@ -16,7 +16,7 @@ export default new GraphQLObjectType({
       type: Team,
       resolve: (obj) => {
         if (!obj.team_id) return null;
-        return teamResolver.Query.team(null, { id: obj.team_id });
+        return teamResolver.Query.team({ id: obj.team_id });
       },
     },
   },

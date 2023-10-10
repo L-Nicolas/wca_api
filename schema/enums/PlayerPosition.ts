@@ -1,20 +1,20 @@
-import { GraphQLEnumType } from 'graphql';
+import { GraphQLEnumType } from 'graphql'
 
 export default new GraphQLEnumType({
   name: 'PlayerPosition',
   description: 'The possible position for a player.',
   values: {
-    FORWARD : {
-      value: 'FORWARD '
+    Attaquant: {
+      value: 'Attaquant',
     },
-    MIDFIELDER: {
-      value: 'MIDFIELDER'
+    'Milieu de terrain': {
+      value: 'Milieu de terrain',
     },
-    DEFENDER: {
-      value: 'DEFENDER'
+    Défenseur: {
+      value: 'Défenseur',
     },
-    GOALKEEPER: {
-        value: 'GOALKEEPER'
-      }
-  }
-});
+    'Gardien de but': {
+      value: 'Gardien de but',
+    },
+  },
+})
