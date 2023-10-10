@@ -2,11 +2,13 @@ import database from '../database/'
 
 const groupResolver = {
   Query: {
-    groups: async () => {
+    groups: async ({ orderBy }: any) => {
       try {
-        const { data, error } = await database.from('Groups').select('*')
-        console.log('error')
-        console.log(error)
+        const { data, error } = await database
+          .from('Groups')
+          .select('*')
+          .order(orderBy.field, { ascending: orderBy.direction === 'ASC' })
+
         if (error) {
           throw new Error('Impossible de récupérer les groupes')
         }
