@@ -20,7 +20,7 @@ const teamResolver = {
         throw new Error("Erreur lors de la récupération des teams");
       }
     },
-    team: async (_: any, { id }: any) => {
+    team: async ({ id }: any) => {
       try {
         const { data, error } = await database.from("Teams").select("*").eq("id", id).single();
 
