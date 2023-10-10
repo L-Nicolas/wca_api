@@ -5,7 +5,7 @@ export default new GraphQLEnumType({
   description: 'The possible field for ordering teams.',
   values: {
     RANK: {
-      value: 'id',
+      value: 'rank',
     },
   },
 })
