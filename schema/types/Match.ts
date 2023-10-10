@@ -1,35 +1,43 @@
 import {
-    GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
-    GraphQLInt
-  } from 'graphql';
-import Team from './Team';
-  
-  export default new GraphQLObjectType({
-    name: 'Match',
-    fields: {
-      id: {
-        type: GraphQLID
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLInt,
+} from 'graphql'
+import Team from './Team'
+import teamResolver from '../../resolvers/teamResolver'
+
+export default new GraphQLObjectType({
+  name: 'Match',
+  fields: {
+    id: {
+      type: GraphQLID,
+    },
+    matchDay: {
+      type: GraphQLString,
+    },
+    location: {
+      type: GraphQLString,
+    },
+    teamA: {
+      type: Team,
+      resolve: (obj) => {
+        if (!obj.teamA_id) return null
+        return teamResolver.Query.team({ id: obj.teamA_id })
       },
-      matchDay: {
-        type: GraphQLString
+    },
+    teamB: {
+      type: Team,
+      resolve: (obj) => {
+        if (!obj.teamB_id) return null
+        return teamResolver.Query.team({ id: obj.teamB_id })
       },
-      location: {
-        type: GraphQLString
-      },
-      teamA: {
-        type: Team
-      },
-      teamB: {
-        type: Team
-      },
-      teamAScore: {
-        type: GraphQLInt
-      },
-      teamBScore: {
-        type: GraphQLInt
-      }
-    }
-  });
-  
+    },
+    teamAScore: {
+      type: GraphQLInt,
+    },
+    teamBScore: {
+      type: GraphQLInt,
+    },
+  },
+})
