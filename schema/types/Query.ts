@@ -15,14 +15,21 @@ import matchResolver from '../../resolvers/matchResolver'
 import teamResolver from '../../resolvers/teamResolver'
 import playerResolver from '../../resolvers/playerResolver'
 import TeamOrder from '../inputs/TeamOrder'
+import GroupOrder from '../inputs/GroupOrder'
 
 export default new GraphQLObjectType({
   name: 'Query',
   fields: {
     groups: {
       type: new GraphQLList(groupType),
-      resolve: async () => {
-        return groupResolver.Query.groups()
+      args: {
+        orderBy: {
+          type: GroupOrder,
+          defaultValue: { field: 'id', direction: 'ASC' },
+        },
+      },
+      resolve: async (_, { orderBy }) => {
+        return groupResolver.Query.groups({ orderBy: orderBy })
       },
     },
     matchs: {
