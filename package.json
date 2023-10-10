@@ -9,6 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git add . && git commit -m \"Heroku\" && git push heroku main"
   },
+  "engines": {
+    "node": "18.17.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/L-Nicolas/wca_api.git"
