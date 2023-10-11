@@ -10,7 +10,7 @@ const matchResolver = {
         }
         return data.map((match) => ({
           id: match.id,
-          matchDay: match.matchDay,
+          matchDay: match.date,
           location: match.location,
           teamA_id: match.teamA_id,
           teamB_id: match.teamB_id,
