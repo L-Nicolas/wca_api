@@ -16,6 +16,9 @@ type Query {
 
   createUser: User
   createUser(username: String!, password: String!): User
+
+  login: User
+  login(username: String!, password: String!): User
 }
 
 type Group {

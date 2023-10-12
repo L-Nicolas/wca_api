@@ -3,6 +3,7 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
+  GraphQLString,
 } from 'graphql'
 import 'reflect-metadata'
 import { ObjectType, Field, ID } from 'type-graphql'
@@ -10,12 +11,16 @@ import groupType from './Group'
 import matchType from './Match'
 import teamType from './Team'
 import playerType from './Player'
+import userType from './User'
 import groupResolver from '../../resolvers/groupResolver'
 import matchResolver from '../../resolvers/matchResolver'
 import teamResolver from '../../resolvers/teamResolver'
+import createUserResolver from '../../resolvers/createUserResolver'
 import playerResolver from '../../resolvers/playerResolver'
 import TeamOrder from '../inputs/TeamOrder'
 import GroupOrder from '../inputs/GroupOrder'
+import { create } from 'domain'
+import login from '../../resolvers/loginResolver'
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -63,6 +68,32 @@ export default new GraphQLObjectType({
       resolve: (_, { team_id }) => {
         return playerResolver.Query.playersByIDTeam({ team_id: team_id })
       },
+    },
+    createUser: {
+      type: userType,
+      args: {
+        username: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, { username, password }) => {
+        return createUserResolver.Mutation.createUser({
+          username: username,
+          password: password,
+        })
+      }
+    },
+    login: {
+      type: userType,
+      args: {
+        username: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, { username, password }) => {
+        return login.Mutation.login({
+          username: username,
+          password: password,
+        })
+      }
     },
     players: {
       type: new GraphQLList(playerType),
