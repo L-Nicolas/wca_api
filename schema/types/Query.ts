@@ -3,6 +3,7 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
+  GraphQLString,
 } from 'graphql'
 import 'reflect-metadata'
 import { ObjectType, Field, ID } from 'type-graphql'
@@ -11,7 +12,9 @@ import matchType from './Match'
 import teamType from './Team'
 import playerType from './Player'
 import groupResolver from '../../resolvers/groupResolver'
+import researchResolver from '../../resolvers/researchResolver'
 import matchResolver from '../../resolvers/matchResolver'
+import matchsSearchResolver from '../../resolvers/matchsResearchResolver'
 import teamResolver from '../../resolvers/teamResolver'
 import playerResolver from '../../resolvers/playerResolver'
 import TeamOrder from '../inputs/TeamOrder'
@@ -71,6 +74,26 @@ export default new GraphQLObjectType({
         return playerResolver.Query.playersByIDTeam({ team_id: team_id })
       },
     },
+    filteredPlayersByName: {
+      type: new GraphQLList(playerType),
+      args: {
+        playerName: { type: GraphQLString }, // Argument pour le nom du match
+      },
+      resolve: async (_, { playerName }) => {
+        return researchResolver.Query.filteredPlayersByName(_, { playerName });
+      },
+    },
+    filteredMatchsByName: {
+      type: new GraphQLList(matchType),
+      args: {
+        teamName: { type: GraphQLString }, // Argument pour le nom du match
+      },
+      resolve: async (_, { teamName }) => {
+        return matchsSearchResolver.Query.matchesByTeamName(_, { teamName });
+      },
+    }
+
+
   },
 })
 
