@@ -9,6 +9,8 @@ const groupResolver = {
           .select('*')
           .order(orderBy.field, { ascending: orderBy.direction === 'ASC' })
 
+        console.log(data)
+
         if (error) {
           throw new Error('Impossible de récupérer les groupes')
         }
