@@ -14,7 +14,6 @@ export default /* GraphQL */ `
         id
       }
     }
-
     teams(orderBy: { field: RANK, direction: ASC }) {
       id
     }
