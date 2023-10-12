@@ -18,8 +18,8 @@
     "type": "git",
     "url": "git+https://github.com/L-Nicolas/wca_api.git"
   },
-  "author": "",
   "license": "ISC",
+  "author": "",
   "bugs": {
     "url": "https://github.com/L-Nicolas/wca_api/issues"
   },
