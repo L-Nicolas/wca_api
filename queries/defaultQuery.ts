@@ -14,7 +14,8 @@ export default /* GraphQL */ `
         id
       }
     }
-    teams(orderBy: { field: RANK, direction: ASC }) {
+    
+    teams(orderBy: {field: RANK, direction: ASC}) {
       id
     }
     matchs {
