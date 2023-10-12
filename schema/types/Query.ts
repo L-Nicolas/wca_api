@@ -13,7 +13,9 @@ import teamType from './Team'
 import playerType from './Player'
 import userType from './User'
 import groupResolver from '../../resolvers/groupResolver'
+import researchResolver from '../../resolvers/researchResolver'
 import matchResolver from '../../resolvers/matchResolver'
+import matchsSearchResolver from '../../resolvers/matchsResearchResolver'
 import teamResolver from '../../resolvers/teamResolver'
 import createUserResolver from '../../resolvers/createUserResolver'
 import playerResolver from '../../resolvers/playerResolver'
@@ -102,6 +104,26 @@ export default new GraphQLObjectType({
         return playerResolver.Query.playersByIDTeam({ team_id: team_id })
       },
     },
+    filteredPlayersByName: {
+      type: new GraphQLList(playerType),
+      args: {
+        playerName: { type: GraphQLString }, // Argument pour le nom du match
+      },
+      resolve: async (_, { playerName }) => {
+        return researchResolver.Query.filteredPlayersByName(_, { playerName });
+      },
+    },
+    filteredMatchsByName: {
+      type: new GraphQLList(matchType),
+      args: {
+        teamName: { type: GraphQLString }, // Argument pour le nom du match
+      },
+      resolve: async (_, { teamName }) => {
+        return matchsSearchResolver.Query.matchesByTeamName(_, { teamName });
+      },
+    }
+
+
   },
 })
 
