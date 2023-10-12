@@ -1,6 +1,22 @@
+import internal from 'stream';
 import database from '../database/'
 
 const playerResolver = {
+  Mutation: {
+    createPlayer: async ({ name, goalsScored, assists, yellowCards, redCards, photoURL, team_id, position}:
+      { name: string, goalsScored: number , assists: number, yellowCards: number, redCards : number, photoURL: string, team_id : number, position:string}) => {
+      const { data, error } = await database.from('Players').upsert([
+        {
+          name, goalsScored, assists, yellowCards, redCards, photoURL, team_id, position
+        },
+      ]);
+      if (error) {
+        throw new Error('Échec de la création du joueur ' + error.message);
+      }
+      return data[0];
+    },
+  },
+
   Query: {
     players: async () => {
       try {

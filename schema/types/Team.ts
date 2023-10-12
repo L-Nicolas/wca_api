@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString } from "graphql";
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from "graphql";
 
 export default new GraphQLObjectType({
   name: "Team",

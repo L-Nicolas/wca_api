@@ -1,6 +1,21 @@
 import database from '../database'
 
 const teamResolver = {
+  Mutation: {
+    createTeam: async ({ name, abbreviation,flagURL, photoURL}:
+      { name : string, abbreviation : string,flagURL : string, photoURL : string}) => {
+      const { data, error } = await database.from('Teams').upsert([
+        {
+          name, abbreviation,flagURL, photoURL,is_created: true,
+        },
+      ]);
+      if (error) {
+        throw new Error('Échec de la création de l equip ' + error.message);
+      }
+      return data[0];
+    },
+  },
+
   Query: {
     teams: async ({ orderBy }: any) => {
       try {

@@ -1,5 +1,7 @@
 import {
+  GraphQLBoolean,
   GraphQLID,
+  GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -79,6 +81,48 @@ export default new GraphQLObjectType({
         return createUserResolver.Mutation.createUser({
           username: username,
           password: password,
+        })
+      }
+    },
+    createTeam: {
+      type: teamType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        abbreviation: { type: new GraphQLNonNull(GraphQLString) },
+        flagURL: { type: new GraphQLNonNull(GraphQLString) },
+        photoURL: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, { name, abbreviation,flagURL, photoURL}) => {
+        return teamResolver.Mutation.createTeam({
+          name : name, 
+          abbreviation : abbreviation,
+          flagURL : flagURL, 
+          photoURL : photoURL,
+        })
+      }
+    },
+    createPlayer: {
+      type: playerType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString)},
+        goalsScored: { type: new GraphQLNonNull(GraphQLInt)},
+        assists: { type: new GraphQLNonNull(GraphQLInt)},
+        yellowCards: { type: new GraphQLNonNull(GraphQLInt)},
+        redCards: { type: new GraphQLNonNull(GraphQLInt)},
+        photoURL: { type: new GraphQLNonNull(GraphQLString)},
+        team_id: { type: new GraphQLNonNull(GraphQLInt)},
+        position: { type: new GraphQLNonNull(GraphQLString)}
+      },
+      resolve: async (_, { name, goalsScored, assists, yellowCards, redCards, photoURL, team_id, position}) => {
+        return playerResolver.Mutation.createPlayer({
+          name: name, 
+          goalsScored: goalsScored,
+          assists: assists, 
+          yellowCards: yellowCards, 
+          redCards: redCards, 
+          photoURL: photoURL, 
+          team_id: team_id, 
+          position : position
         })
       }
     },
