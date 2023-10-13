@@ -6,14 +6,12 @@ const createUserResolver = {
   Mutation: {
     createUser: async ({ username, password }: { username: string, password: string }) => {
       const { data: existingUser } = await database.from('Users').select('*').eq('username', username);
-
       if (existingUser && existingUser.length > 0) {
         throw new Error('Un utilisateur avec ce nom d\'utilisateur existe déjà.');
       }
 
 
       const hashedPassword = await bcrypt.hash(password, 10);
-
       const { data, error } = await database.from('Users').upsert([
         {
           username,

@@ -19,6 +19,10 @@ type Query {
 
   login: User
   login(username: String!, password: String!): User
+
+  createTeam(name: String, abbreviation: String, flagURL:String, photoURL:String): Team
+
+  createPlayer(name: String, goalsScored: Int, assists:Int, yellowCards:Int, redCards: Int, photoURL:String, team_id:In, position: String ): Player
 }
 
 type Group {
