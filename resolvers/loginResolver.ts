@@ -5,7 +5,6 @@ import database from '../database';
 const loginResolver = {
   Mutation: {
     login: async ({ username, password }: { username: string, password: string }) => {
-      // Rechercher l'utilisateur par son nom d'utilisateur
       const { data: users } = await database.from('Users').select('*').eq('username', username);
 
       if (users && users.length === 0) {
