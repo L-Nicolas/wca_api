@@ -28,7 +28,7 @@ const loginResolver = {
         throw new Error('Mot de passe incorrect.')
       }
 
-      const token = jwt.sign({ userId: user.id }, 'votre_secret_jwt') // Remplacez 'votre_secret_jwt' par une clé secrète réelle
+      const token = jwt.sign({ userId: user.id }, 'votre_secret_jwt')
 
       return { token, user }
     },
