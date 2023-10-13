@@ -22,7 +22,6 @@ const loginResolver = {
       }
 
       const user = users![0]
-
       const passwordMatch = await bcrypt.compare(password, user.password)
 
       if (!passwordMatch) {
